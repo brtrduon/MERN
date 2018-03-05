@@ -20,7 +20,7 @@ exports.signup = function(req, res, next) {
     const password = req.body.password;
 
     if (!username || password) {
-        return releaseEvents.status(422).send({ error: 'Email and/or password cannot be blank'});
+        return res.status(422).send({ error: 'Email and/or password cannot be blank'});
     }
     Admin.findOne({ username: username }, function(err, existingAdmin) {
         if (err) {
