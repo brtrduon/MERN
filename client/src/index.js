@@ -27,6 +27,7 @@ ReactDOM.render(
       <Route path='/' component={App} />
       <Route path='/signup' component={Signup} />
       <Route path='/signin' component={Signin} />
+      <Route path='/signout' component={Signout} />
       <Route path='/root' component={RequireAuth(Root)} />
     </Router>
   </Provider>
