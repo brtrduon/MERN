@@ -47,6 +47,7 @@ class Signup extends Component {
                     <input className='form-control' type='password' {...confirm_password} />
                     {confirm_password.touched && confirm_password.error && <div className='error'>{confirm_password.error}</div>}
                 </fieldset>
+                {this.renderAlert()}
                 <button action='submit' className='btn btn-primary'>Sign Up</button>
             </form>
         );

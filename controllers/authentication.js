@@ -20,7 +20,6 @@ exports.signup = function(req, res, next) {
     const first_name = req.body.first_name;
     const last_name = req.body.last_name;
     const password = req.body.password;
-    console.log(username, first_name, last_name, password);
 
     if (!username || !password || !first_name || !last_name) {
         return res.status(422).send({ error: 'Fields cannot be blank'});

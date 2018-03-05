@@ -26,7 +26,7 @@ export function signupAdmin({ username, first_name, last_name, password }) {
             localStorage.setItem('token', response.data.token);
             browserHistory.push('/root');
         })
-        .catch(response => dispatch(authError(response.data.error)));
+        .catch((response) => dispatch(authError(response.response.data.error)));
     };
 }
 
