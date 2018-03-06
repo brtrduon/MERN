@@ -33,10 +33,11 @@ const jwtOptions = {
 
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
     Admin.findById(payload.sub, function(err, admin) {
+        console.log('pewp');
         if (err) {
             return done(err, false);
         }
-        if (user) {
+        if (admin) {
             return done(null, user);
         }
         return done(null, false);
