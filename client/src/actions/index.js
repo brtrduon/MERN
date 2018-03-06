@@ -9,6 +9,7 @@ export function signinAdmin({ username, password }) {
         axios.post(`${ROOT_URL}/signin`, {username, password})
             .then(response => {
                 dispatch({ type: AUTH_USER });
+                console.log('pewp');
                 localStorage.setItem('token', response.data.token);
                 browserHistory.push('/root');
             })
@@ -26,7 +27,7 @@ export function signupAdmin({ username, first_name, last_name, password }) {
             localStorage.setItem('token', response.data.token);
             browserHistory.push('/root');
         })
-        .catch((response) => dispatch(authError(response.response.data.error)));
+        .catch(response => dispatch(authError(response.response.data.err)));
     };
 }
 
