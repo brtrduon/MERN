@@ -2,17 +2,18 @@ const jwt = require('jwt-simple');
 const config = require('../config');
 const Admin = require('../models/kitchen');
 
-function token(admin) {
+function token(user) {
+    console.log(user)
     const timestamp = new Date().getTime();
     return jwt.encode({
-        sub: admin.id,
+        sub: user.id,
         iat: timestamp
         }, config.secret
     );
 }
 
 exports.signin = function(req, res, next) {
-    res.send({ token: token(req.admin) });
+    res.send({ token: token(req.user) });
 }
 
 exports.signup = function(req, res, next) {

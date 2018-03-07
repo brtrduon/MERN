@@ -21,6 +21,7 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
             if (!isMatch) {
                 return done(null, false);
             }
+            // console.log(admin);
             return done(null, admin);
         });
     });
@@ -33,12 +34,11 @@ const jwtOptions = {
 
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
     Admin.findById(payload.sub, function(err, admin) {
-        console.log('pewp');
         if (err) {
             return done(err, false);
         }
         if (admin) {
-            return done(null, user);
+            return done(null, admin);
         }
         return done(null, false);
     });
