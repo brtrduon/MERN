@@ -9,7 +9,7 @@ import App from './components/app';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
-import Root from './components/root';
+import Root from './components/session/root';
 import RequireAuth from './components/auth/require_auth';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
