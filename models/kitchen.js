@@ -6,7 +6,13 @@ const adminSchema = new Schema({
     username: { type: String, unique: true, lowercase: true },
     first_name: String,
     last_name: String,
-    password: String
+    password: String,
+});
+
+const itemSchema = new Schema({
+    name: { type: String, unique: true, lowercase: true },
+    price: Number,
+    desc: String
 });
 
 adminSchema.pre('save', function(next) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
+import Header from '../header';
 import * as actions from '../../actions';
 
 class Signup extends Component {
@@ -21,35 +22,38 @@ class Signup extends Component {
         const {handleSubmit, fields: { username, first_name, last_name, password, confirm_password }} = this.props;
     
         return (
-            <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                <fieldset className='form-group'>
-                    <label>Username:</label>
-                    <input className='form-control' {...username} />
-                    {username.touched && username.error && <div className='error'>{username.error}</div>}
-                </fieldset>
-                <fieldset className='form-group'>
-                    <label>First Name:</label>
-                    <input className='form-control' {...first_name} />
-                    {first_name.touched && first_name.error && <div className='error'>{first_name.error}</div>}
-                </fieldset>
-                <fieldset className='form-group'>
-                    <label>Last Name:</label>
-                    <input className='form-control' {...last_name} />
-                    {last_name.touched && last_name.error && <div className='error'>{last_name.error}</div>}
-                </fieldset>
-                <fieldset className='form-group'>
-                    <label>Password:</label>
-                    <input className='form-control' type='password' {...password} />
-                    {password.touched && password.error && <div className='error'>{password.error}</div>}
-                </fieldset>
-                <fieldset className='form-group'>
-                    <label>Confirm Password:</label>
-                    <input className='form-control' type='password' {...confirm_password} />
-                    {confirm_password.touched && confirm_password.error && <div className='error'>{confirm_password.error}</div>}
-                </fieldset>
-                {this.renderAlert()}
-                <button action='submit' className='btn btn-primary'>Sign Up</button>
-            </form>
+            <div>
+                <Header />
+                <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+                    <fieldset className='form-group'>
+                        <label>Username:</label>
+                        <input className='form-control' {...username} />
+                        {username.touched && username.error && <div className='error'>{username.error}</div>}
+                    </fieldset>
+                    <fieldset className='form-group'>
+                        <label>First Name:</label>
+                        <input className='form-control' {...first_name} />
+                        {first_name.touched && first_name.error && <div className='error'>{first_name.error}</div>}
+                    </fieldset>
+                    <fieldset className='form-group'>
+                        <label>Last Name:</label>
+                        <input className='form-control' {...last_name} />
+                        {last_name.touched && last_name.error && <div className='error'>{last_name.error}</div>}
+                    </fieldset>
+                    <fieldset className='form-group'>
+                        <label>Password:</label>
+                        <input className='form-control' type='password' {...password} />
+                        {password.touched && password.error && <div className='error'>{password.error}</div>}
+                    </fieldset>
+                    <fieldset className='form-group'>
+                        <label>Confirm Password:</label>
+                        <input className='form-control' type='password' {...confirm_password} />
+                        {confirm_password.touched && confirm_password.error && <div className='error'>{confirm_password.error}</div>}
+                    </fieldset>
+                    {this.renderAlert()}
+                    <button action='submit' className='btn btn-primary'>Sign Up</button>
+                </form>
+            </div>
         );
     }
 }
@@ -72,7 +76,6 @@ function validate(formProps) {
     if (formProps.password !== formProps.confirm_password) {
         errors.password = 'Passwords must match';
     }
-
     return errors;
 }
 

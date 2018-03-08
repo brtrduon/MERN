@@ -3,7 +3,6 @@ const config = require('../config');
 const Admin = require('../models/kitchen');
 
 function token(user) {
-    console.log(user)
     const timestamp = new Date().getTime();
     return jwt.encode({
         sub: user.id,

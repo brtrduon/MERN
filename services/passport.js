@@ -21,7 +21,6 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
             if (!isMatch) {
                 return done(null, false);
             }
-            // console.log(admin);
             return done(null, admin);
         });
     });

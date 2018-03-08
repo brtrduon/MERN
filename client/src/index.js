@@ -10,6 +10,7 @@ import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import Root from './components/session/root';
+import Additem from './components/session/additem';
 import RequireAuth from './components/auth/require_auth';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
@@ -29,6 +30,7 @@ ReactDOM.render(
       <Route path='/signin' component={Signin} />
       <Route path='/signout' component={Signout} />
       <Route path='/root' component={RequireAuth(Root)} />
+      <Route path='/root/additem' component={RequireAuth(Additem)} />
     </Router>
   </Provider>
   , document.querySelector('.container'));

@@ -1,5 +1,7 @@
 const Authentication = require('./controllers/authentication');
 const Admin = require('./controllers/admin');
+// wanted to use a separate controller once the admin is logged in, but do whatever is simpler, I guess
+
 const passportService = require('./services/passport');
 const passport = require('passport');
 
