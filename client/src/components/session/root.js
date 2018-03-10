@@ -5,16 +5,28 @@ import Header from '../header';
 import * as actions from '../../actions';
 
 class Root extends Component {
+    componentWillMount() {
+        this.props.getItems;
+    }
 
     render() {
         return (
             <div>
                 <Header />
                 {/* loop through items from models here */}
+                {this.props.items}
+                {this.props.message}
                 <Link className='link' to='/root/additem'>Add Item</Link>
             </div>
         );
     }
 }
 
-export default connect(null, actions)(Root);
+function mapStateToProps(state) {
+    return {
+        message: state.auth.message,
+        items: state.auth.items
+    };
+}
+
+export default connect(mapStateToProps, actions)(Root);

@@ -12,7 +12,8 @@ const adminSchema = new Schema({
 const itemSchema = new Schema({
     name: { type: String, unique: true, lowercase: true },
     price: Number,
-    desc: String
+    desc: String,
+    // img: { type: String, required: true }
 });
 
 adminSchema.pre('save', function(next) {
@@ -41,5 +42,6 @@ adminSchema.methods.comparePassword = function(candidatePassword, callback) {
 }
 
 const modelClass = mongoose.model('admin', adminSchema);
+const Item = mongoose.model('Item', itemSchema);
 
 module.exports = modelClass;

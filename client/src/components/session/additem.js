@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
+// import axios from 'axios';
 import Header from '../header';
 import * as actions from '../../actions';
 
@@ -7,6 +8,26 @@ class Additem extends Component {
     handleFormSubmit(formProps) {
         this.props.addItem(formProps);
     }
+    
+    // state = {
+    //     selectedFile: null
+    // };
+    
+    // fileSelectedHandler = event => {
+    //     this.setState({
+    //         selectedFile: event.target.files[0]
+    //     });
+    // }
+    
+    // fileUploadHandler = () => {
+    //     const ROOT_URL = 'http://localhost:8000';
+    //     const fd = new FormData();
+    //     fd.append('img', this.state.selectedFile, this.state.selectedFile.name);
+    //     axios.post(`${ROOT_URL}/imgupload`)
+    //     .then(res => {
+    //         console.log(res);
+    //     });
+    // }
 
     renderAlert() {
         if (this.props.errorMessage) {
@@ -19,16 +40,17 @@ class Additem extends Component {
     }
 
     render(){
-        const {handleSubmit, fields: { name, price, desc, img }} = this.props;
-
+        const {handleSubmit, fields: { name, price, desc }} = this.props;
         return (
             <div>
                 <Header />
                 <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                    <fieldset className='form-group'>
-                        <label>Upload image</label>
-                        <input type='file' {...img} />
-                    </fieldset>
+                    {/* <fieldset className='form-group'>
+                        <label>Upload image:</label>
+                        <br></br>
+                        <input type='file' onChange={this.fileSelectedHandler} {...img} />
+                        <button onClick={this.fileUploadHandler}>Upload</button>
+                    </fieldset> */}
                     <fieldset className='form-group'>
                         <label>Item Name:</label>
                         <input className='form-control' {...name} />
