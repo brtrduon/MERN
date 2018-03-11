@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Header from '../header';
 import * as actions from '../../actions';
 
 class Signout extends Component {
@@ -10,7 +9,6 @@ class Signout extends Component {
 
     render() {
         return <div>
-            <Header />
             Successfully signed out
             </div>
     }

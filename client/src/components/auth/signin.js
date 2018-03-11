@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import Header from '../header';
 import * as actions from '../../actions';
 
 class Signin extends Component {
@@ -22,7 +21,6 @@ class Signin extends Component {
         const { handleSubmit, fields: { username, password }} = this.props;
         return (
             <div>
-                <Header />
                 <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                     <fieldset className='form-group'>
                         <label>Username:</label>
