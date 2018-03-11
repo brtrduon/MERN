@@ -10,7 +10,7 @@ export function signinAdmin({ username, password }) {
             .then(response => {
                 dispatch({ type: AUTH_USER });
                 localStorage.setItem('token', response.data.token);
-                browserHistory.push('/root');
+                browserHistory.push('/admin/root');
             })
             .catch(() => {
                 dispatch(authError('Bad login info'));
@@ -24,7 +24,7 @@ export function signupAdmin({ username, first_name, last_name, password }) {
         .then(response => {
             dispatch({ type: AUTH_USER });
             localStorage.setItem('token', response.data.token);
-            browserHistory.push('/root');
+            browserHistory.push('/admin/root');
         })
         .catch(response => dispatch(authError(response.response.data.err)));
     };
@@ -35,7 +35,8 @@ export function addItem({ name, price, desc }) {
         axios.post(`${ROOT_URL}/additem`, { name, price, desc })
         .then(response => {
             dispatch({ type: ITEM_ADDED });
-            browserHistory.push('/root');
+            localStorage.setItem('item', response.data.item);
+            browserHistory.push('/admin/root');
         })
         .catch(response => dispatch(authError(response.response.data.err)));
     };

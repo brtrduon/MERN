@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 
 class Root extends Component {
     componentWillMount() {
@@ -14,7 +14,7 @@ class Root extends Component {
                 {/* loop through items from models here */}
                 {this.props.items}
                 {this.props.message}
-                <Link className='link' to='/root/additem'>Add Item</Link>
+                <Link className='link' to='/admin/additem'>Add Item</Link>
             </div>
         );
     }

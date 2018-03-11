@@ -16,7 +16,7 @@ exports.getitems = function(req, res, next) {
             return next(err);
         }
         console.log(res.json(items));
-    })
+    });
 }
 
 exports.additem = function(req, res, next) {
