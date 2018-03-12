@@ -40,19 +40,14 @@ export function addItem({ name, price, desc }) {
     };
 }
 
-export function getItems() {
-    return function(dispatch) {
-        axios.get(`${ROOT_URL}/getitems`, {
-            headers: { authorization: localStorage.getItem('token') }
-        })
-        .then(response => {
-            dispatch({
-                type: GET_ITEMS,
-                payload: response.data.items
-            });
-        });
-    };
-}
+// export function getItems() {
+//     return function() {
+//         axios.get(`${ROOT_URL}/getitems`)
+//         .then(response => {
+//             this.setState({ items: response.data });
+//         });
+//     };
+// }
 
 export function authError(error) {
     return {
