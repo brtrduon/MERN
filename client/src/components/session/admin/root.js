@@ -24,27 +24,24 @@ class Root extends Component {
     render() {
         return (
             <div>
-                {this.state.items.map(item => {
-                    return <div key={item.id}>
-                        <p>Item name: {item.name}</p>
-                        <p>Price: {item.price}</p>
-                        <p>Description: {item.desc}</p>
-                        <hr></hr>
-                    </div>
-                },
-                    // <li key={item.id}>Item name: {item.name} </li>
-                )}
+                <table>
+                    <tr>
+                        <th>Item name |</th>
+                        <th>Price |</th>
+                        <th>Description</th>
+                    </tr>
+                    {this.state.items.map(item => {
+                        return <tr key={item.id}>
+                            <td>{item.name}</td>
+                            <td>{item.price}</td>
+                            <td>{item.desc}</td>
+                        </tr>
+                        },
+                    )}
+                </table>
             </div>
         )
     }
 }
-
-// function mapStateToProps(state) {
-//     return {
-//         items: state.auth.items
-//     };
-// }
-
-// export default connect(mapStateToProps, actions)(Root);
 
 export default Root;
