@@ -28,11 +28,11 @@ if (token) {
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path='/' component={App}>
+      <Route exact path='/' component={App}>
         <Route path='/signup' component={Signup} />
         <Route path='/signin' component={Signin} />
         <Route path='/signout' component={Signout} />
-        <Route path='/admin' component={RequireAuth(Admin)}>
+        <Route exact path='/admin' component={RequireAuth(Admin)}>
           <Route path='/admin/root' component={RequireAuth(Root)} />
           <Route path='/admin/additem' component={RequireAuth(Additem)} />
         </Route>

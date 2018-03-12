@@ -40,6 +40,7 @@ exports.additem = function(req, res, next) {
             if (err) {
                 return next(err);
             }
+            res.json({ item });
             console.log('item saved, breh');
         });
     });

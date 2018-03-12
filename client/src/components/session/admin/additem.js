@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 // import axios from 'axios';
 import * as actions from '../../../actions';
 

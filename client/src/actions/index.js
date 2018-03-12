@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, ITEM_ADDED, GET_ITEMS } from './types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER } from './types';
 
 const ROOT_URL = 'http://localhost:8000';
 
@@ -32,10 +32,9 @@ export function signupAdmin({ username, first_name, last_name, password }) {
 
 export function addItem({ name, price, desc }) {
     return function(dispatch) {
+        console.log('pewp');
         axios.post(`${ROOT_URL}/additem`, { name, price, desc })
         .then(response => {
-            dispatch({ type: ITEM_ADDED });
-            localStorage.setItem('item', response.data.item);
             browserHistory.push('/admin/root');
         })
         .catch(response => dispatch(authError(response.response.data.err)));
@@ -51,7 +50,6 @@ export function getItems() {
                 type: GET_ITEMS,
                 payload: response.data.items
             });
-            console.log('pewp');
         });
     };
 }

@@ -1,10 +1,7 @@
 import { 
     AUTH_USER, 
     UNAUTH_USER, 
-    AUTH_ERROR, 
-    GET_ADMIN, 
-    ITEM_ADDED, 
-    GET_ITEMS 
+    AUTH_ERROR
 } from '../actions/types';
 
 export default function(state = {}, action) {
@@ -15,10 +12,6 @@ export default function(state = {}, action) {
             return { ...state, authenticated: false };
         case AUTH_ERROR:
             return { ...state, error: action.payload };
-        case ITEM_ADDED:
-            return { ...state, message: action.payload };
-        case GET_ITEMS:
-            return { ...state, items: action.payload };
     }
     return state;
 }
