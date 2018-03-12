@@ -15,7 +15,8 @@ exports.getitems = function(req, res, next) {
         if (err) {
             return next(err);
         }
-        console.log(res.json(items));
+        res.json({ items });
+        console.log(items);
     });
 }
 

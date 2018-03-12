@@ -5,17 +5,22 @@ import * as actions from '../../../actions';
 
 class Root extends Component {
     componentWillMount() {
-        this.props.getItems;
+        this.props.getItems();
     }
 
     render() {
         return (
             <div>
-                {/* loop through items from models here */}
                 <Link className='link' to='/admin/additem'>Add Item</Link>
             </div>
         );
     }
 }
 
-export default Root;
+function mapStateToProps(state) {
+    return {
+        items: state.auth.items
+    };
+}
+
+export default connect(mapStateToProps, actions)(Root);
