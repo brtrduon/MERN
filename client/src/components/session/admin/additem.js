@@ -5,25 +5,9 @@ import axios from 'axios';
 import * as actions from '../../../actions';
 
 class Additem extends Component {
-    state = {
-        selectedFile: null
-    }
 
     handleFormSubmit(formProps) {
         this.props.addItem(formProps);
-    }
-
-    fileSelectedHandler = event => {
-        this.setState({
-            selectedFile: event.target.files[0]
-        });
-    };
-
-    fileUploadHandler = () => {
-        const ROOT_URL = 'http://localhost:8000';
-        const fd = new FormData();
-        fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
-        axios.post(`${ROOT_URL}/uploadimg`);
     }
 
     renderAlert() {
@@ -37,14 +21,13 @@ class Additem extends Component {
     }
 
     render(){
-        const {handleSubmit, fields: { name, price, desc, img}} = this.props;
+        const {handleSubmit, fields: { name, price, desc }} = this.props;
         return (
             <div>
                 <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                     <fieldset className='form-group'>
                         <label>Upload an image</label>
-                        <input type='file' onChange={this.fileSelectedHandler} {...img} />
-                        <button onClick={this.fileUploadHandler}>Upload</button>
+                        <input type='file' />
                     </fieldset>
                     <fieldset className='form-group'>
                         <label>Item Name:</label>
@@ -80,9 +63,6 @@ function validate(formProps) {
     }
     if(!formProps.desc) {
         errors.desc = 'Description cannot be blank';
-    }
-    if(!formProps.img) {
-        errors.img = 'Please upload an image';
     }
 
     return errors;

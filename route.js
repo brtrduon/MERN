@@ -1,12 +1,8 @@
 const Authentication = require('./controllers/authentication');
 const Admin = require('./controllers/admin');
-// wanted to use a separate controller once the admin is logged in, but do whatever is simpler, I guess
 
 const passportService = require('./services/passport');
 const passport = require('passport');
-
-const multer = require('multer');
-const upload = multer({dest: 'client/public/uploads'});
 
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireSignin = passport.authenticate('local', { session: false});
@@ -23,6 +19,4 @@ module.exports = function(app) {
     app.get('/getitems', Admin.getitems);
 
     app.post('/additem', Admin.additem);
-
-    app.post('/uploadimg')
 }

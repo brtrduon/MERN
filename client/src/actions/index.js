@@ -40,15 +40,6 @@ export function addItem({ name, price, desc }) {
     };
 }
 
-// export function getItems() {
-//     return function() {
-//         axios.get(`${ROOT_URL}/getitems`)
-//         .then(response => {
-//             this.setState({ items: response.data });
-//         });
-//     };
-// }
-
 export function authError(error) {
     return {
         type: AUTH_ERROR,

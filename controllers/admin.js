@@ -2,13 +2,6 @@ const mongoose = require('mongoose');
 const Item = mongoose.model('Item');
 
 const multer = require('multer');
-const upload = multer({dest: './client/public/uploads'});
-
-// exports.uploaditem = function(req, res, next) {
-//     upload.single('img'), (req, res, next) => {
-//         console.log(req.file);
-//     }
-// }
 
 exports.getitems = function(req, res, next) {
     Item.find({}, function(err, items) {
