@@ -13,7 +13,7 @@ const itemSchema = new Schema({
     name: { type: String, unique: true, lowercase: true },
     price: Number,
     desc: String,
-    // img: { type: String, required: true }
+    img: { type: String, required: true }
 });
 
 adminSchema.pre('save', function(next) {

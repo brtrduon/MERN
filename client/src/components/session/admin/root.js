@@ -39,6 +39,8 @@ class Root extends Component {
                         },
                     )}
                 </table>
+                <hr></hr>
+                <Link to='/admin/additem'>Add item</Link>
             </div>
         )
     }
