@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import * as actions from '../../../actions';
 
 class Additem extends Component {
@@ -21,13 +20,14 @@ class Additem extends Component {
     }
 
     render(){
-        const {handleSubmit, fields: { name, price, desc }} = this.props;
+        const {handleSubmit, fields: { name, price, desc, img }} = this.props;
         return (
             <div>
                 <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                     <fieldset className='form-group'>
                         <label>Upload an image</label>
-                        <input type='file' />
+                        <input type='file' {...img} value={null} />
+                        {img.touched && img.error && <div className='error'>{img.error}</div>}
                     </fieldset>
                     <fieldset className='form-group'>
                         <label>Item Name:</label>
@@ -64,6 +64,9 @@ function validate(formProps) {
     if(!formProps.desc) {
         errors.desc = 'Description cannot be blank';
     }
+    if(!formProps.img) {
+        errors.img = 'Please select an image';
+    }
 
     return errors;
 }
@@ -76,6 +79,6 @@ function mapStateToProps(state) {
 
 export default reduxForm({
     form: 'additem',
-    fields: ['name', 'price', 'desc'],
+    fields: ['name', 'price', 'desc', 'img'],
     validate
 }, mapStateToProps, actions)(Additem);
