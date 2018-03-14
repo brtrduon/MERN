@@ -26,8 +26,7 @@ class Additem extends Component {
                 <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                     <fieldset className='form-group'>
                         <label>Upload an image</label>
-                        <input type='file' {...img} value={null} />
-                        {img.touched && img.error && <div className='error'>{img.error}</div>}
+                        <input type='file' encType='multipart/form-data' {...img} value={null} />
                     </fieldset>
                     <fieldset className='form-group'>
                         <label>Item Name:</label>

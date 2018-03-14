@@ -41,6 +41,7 @@ export function getItems() {
 
 export function addItem({ name, price, desc, img }) {
     return function(dispatch) {
+        console.log(img);
         axios.post(`${ROOT_URL}/additem`, { name, price, desc, img })
             .then(response => {
                 browserHistory.push('/admin/root');

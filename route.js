@@ -28,7 +28,7 @@ const upload = multer({
         fileSize: 1024 * 1024 * 5
     },
     fileFilter: fileFilter
- });
+ }).single('img');
 
 
 
@@ -41,7 +41,7 @@ module.exports = function(app) {
 
     app.post('/signup', Authentication.signup);
     
-    app.post('/additem', upload.single('img'), Admin.additem);
+    app.post('/additem', Admin.additem);
     
     app.get('/getitems', Admin.getitems);
 }

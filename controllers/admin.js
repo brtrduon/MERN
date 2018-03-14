@@ -35,11 +35,10 @@ exports.getitems = function(req, res, next) {
 }
 
 exports.additem = function(req, res, next) {
-    console.log(req);
     const name = req.body.name;
     const price = req.body.price;
     const desc = req.body.desc;
-    const img = req.file.path
+    const img = req.body.img;
 
     Item.findOne({ name: name }, function(err, existingItem) {
         if (err) {
