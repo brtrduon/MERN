@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 
 class Additem extends Component {
+    fileSelectedHandler = event => {
+        console.log(event);
+        console.log('pewp');
+    };
 
     handleFormSubmit(formProps) {
         this.props.addItem(formProps);
@@ -19,6 +23,11 @@ class Additem extends Component {
         }
     }
 
+    // state = {
+    //     selectedFile: null
+    // };
+
+
     render(){
         const {handleSubmit, fields: { name, price, desc, img }} = this.props;
         return (
@@ -26,7 +35,7 @@ class Additem extends Component {
                 <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                     <fieldset className='form-group'>
                         <label>Upload an image</label>
-                        <input type='file' encType='multipart/form-data' {...img} value={null} />
+                        <input type='file' encType='multipart/form-data' onChange={this.fileSelectedHandler} {...img} value={null} />
                     </fieldset>
                     <fieldset className='form-group'>
                         <label>Item Name:</label>
