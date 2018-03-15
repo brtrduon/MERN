@@ -13,7 +13,17 @@ const itemSchema = new Schema({
     name: { type: String, unique: true, lowercase: true },
     price: Number,
     desc: String,
-    img: { type: String, required: true }
+    img: [{ type: Schema.Types.ObjectId, ref: 'Img'}]
+        }, { timestamps: { created: 'created' }
+    // img: { type: String, required: true }
+});
+
+const imgSchema = new Schema({
+    _item: { type:Schema.Types.ObjectId, ref: 'Item'},
+    name: String,
+    originalName: String,
+    type: String,
+    size: Number
 });
 
 adminSchema.pre('save', function(next) {
@@ -43,5 +53,6 @@ adminSchema.methods.comparePassword = function(candidatePassword, callback) {
 
 const modelClass = mongoose.model('admin', adminSchema);
 const Item = mongoose.model('Item', itemSchema);
+const Img = mongoose.model('Img', imgSchema);
 
 module.exports = modelClass;
