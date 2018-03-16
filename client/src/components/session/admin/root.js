@@ -25,11 +25,11 @@ class Root extends Component {
         return (
             <div>
                 <table>
-                    <tr>
+                    <thead>
                         <th>Item name |</th>
                         <th>Price |</th>
                         <th>Description</th>
-                    </tr>
+                    </thead>
                     {this.state.items.map(item => {
                         return <tr key={item.id}>
                             <td>{item.name}</td>

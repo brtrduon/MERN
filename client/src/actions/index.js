@@ -39,10 +39,10 @@ export function getItems() {
     };
 }
 
-export function addItem({ name, price, desc, img }) {
+export function addItem({ name, price, desc }) {
     return function(dispatch) {
-        console.log(img);
-        axios.post(`${ROOT_URL}/additem`, { name, price, desc, img })
+        // console.log(img);
+        axios.post(`${ROOT_URL}/additem`, { name, price, desc })
             .then(response => {
                 browserHistory.push('/admin/root');
             })

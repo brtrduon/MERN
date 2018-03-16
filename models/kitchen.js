@@ -13,15 +13,13 @@ const itemSchema = new Schema({
     name: { type: String, unique: true, lowercase: true },
     price: Number,
     desc: String,
-    img: [{ type: Schema.Types.ObjectId, ref: 'Img'}]
-        }, { timestamps: { created: 'created' }
-    // img: { type: String, required: true }
+    // img: [{ type: Schema.Types.ObjectId, ref: 'Img'}]
+    //     }, { timestamps: { created: 'created' }
 });
 
 const imgSchema = new Schema({
-    _item: { type:Schema.Types.ObjectId, ref: 'Item'},
+    // _item: { type:Schema.Types.ObjectId, ref: 'Item'},
     name: String,
-    originalName: String,
     type: String,
     size: Number
 });

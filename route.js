@@ -23,14 +23,12 @@ const fileFilter = function(req, file, cb) {
     cb(null, false);
 };
 const upload = multer({
-    // dest: 'client/public/upload',
-    // filename: file.originalname,
-    storage: storage,
+    storage,
     limits: {
         fileSize: 1024 * 1024 * 5
     },
-    fileFilter: fileFilter
- }).single('img');
+    fileFilter
+ });
 
 
 
@@ -43,7 +41,13 @@ module.exports = function(app) {
 
     app.post('/signup', Authentication.signup);
     
-    app.post('/additem', upload, Admin.additem);
+    app.post('/additem', Admin.additem);
+
+    app.post('/uploadimg', upload.single('img'), (req, res) => {
+        console.log('pewp');
+        console.log(req.file);
+        res.json({ upload });
+    });
     
     app.get('/getitems', Admin.getitems);
 }

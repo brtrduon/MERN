@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import * as actions from '../../../actions';
 
 class Additem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedFile: null
+        };
+    }
+
     fileSelectedHandler = event => {
-        console.log(event);
-        console.log('pewp');
+        this.setState({
+            selectedFile: event.target.files[0]
+        });
     };
 
     handleFormSubmit(formProps) {
-        this.props.addItem(formProps);
+        const ROOT_URL = 'http://localhost:8000';
+        const fd = new FormData();
+        fd.append('img', this.state.selectedFile, this.state.selectedFile.name);
+        axios.post(`${ROOT_URL}/uploadimg`, fd)
+
+        this.props.addItem(formProps); // keep this line if you delete the img stuff
     }
 
     renderAlert() {
@@ -23,19 +37,16 @@ class Additem extends Component {
         }
     }
 
-    // state = {
-    //     selectedFile: null
-    // };
-
 
     render(){
-        const {handleSubmit, fields: { name, price, desc, img }} = this.props;
+        const {handleSubmit, fields: { name, price, desc }} = this.props;
         return (
             <div>
+                
                 <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                     <fieldset className='form-group'>
                         <label>Upload an image</label>
-                        <input type='file' encType='multipart/form-data' onChange={this.fileSelectedHandler} {...img} value={null} />
+                        <input type='file' name='img' onChange={this.fileSelectedHandler} />
                     </fieldset>
                     <fieldset className='form-group'>
                         <label>Item Name:</label>
@@ -72,9 +83,6 @@ function validate(formProps) {
     if(!formProps.desc) {
         errors.desc = 'Description cannot be blank';
     }
-    if(!formProps.img) {
-        errors.img = 'Please select an image';
-    }
 
     return errors;
 }
@@ -87,6 +95,6 @@ function mapStateToProps(state) {
 
 export default reduxForm({
     form: 'additem',
-    fields: ['name', 'price', 'desc', 'img'],
+    fields: ['name', 'price', 'desc'],
     validate
 }, mapStateToProps, actions)(Additem);
