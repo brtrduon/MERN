@@ -8,12 +8,10 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 
-// const multer = require('multer');
-
 mongoose.connect('mongodb://localhost/kitchen');
 
 app.use(morgan('combined'));
-app.use(bodyParser.json({ type: '*/*' }));
+app.use(bodyParser.json());
 app.use(cors());
 route(app);
 

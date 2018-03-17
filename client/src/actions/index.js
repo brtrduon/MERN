@@ -40,6 +40,7 @@ export function getItems() {
 }
 
 export function addItem({ name, price, desc }) {
+    console.log(name, price, desc);
     return function(dispatch) {
         axios.post(`${ROOT_URL}/additem`, { name, price, desc })
             .then(response => {

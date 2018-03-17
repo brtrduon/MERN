@@ -11,10 +11,15 @@ exports.getitems = function(req, res, next) {
     });
 }
 
+exports.img = function(req, res, next) {
+    console.log('crack');
+}
+
 exports.additem = function(req, res, next) {
     const name = req.body.name;
     const price = req.body.price;
     const desc = req.body.desc;
+    console.log(name, price, desc);
 
     Item.findOne({ name: name }, function(err, existingItem) {
         if (err) {

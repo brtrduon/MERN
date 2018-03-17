@@ -5,42 +5,7 @@ import Upload from './upload/upload';
 import * as actions from '../../../actions';
 
 class Additem extends Component {
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         img: '',
-    //     };
-    // };
-
-    // onChange = event => {
-    //     const state = this.state;
-
-    //     switch(event.target.name) {
-    //         case 'img':
-    //             state.img = event.target.files[0];
-    //             break;
-    //         default:
-    //             state[event.target.name] = event.target.value;
-    //     };
-
-    //     this.setState(state);
-    // }
-
     handleFormSubmit(formProps) {
-        // onSubmit = event => {
-        //     event.preventDefault();
-        //     const { img } = this.state;
-        //     const ROOT_URL = 'http://localhost:8000';
-        //     let fd = new FormData();
-
-        //     fd.append('img', img);
-
-        //     axios.post(`${ROOT_URL}/upload`, fd)
-        //         .then(res => {
-        //             console.log(res);
-        //         });
-        //     }
-        
         this.props.addItem(formProps);
     }
 
@@ -60,10 +25,6 @@ class Additem extends Component {
             <div>
                 <Upload />
                 <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                    {/* <fieldset className='form-group'>
-                        <label>Upload an image</label>
-                        <input type='file' encType='multipart/form-data' onChange={this.onChange} {...img} value={null} />
-                    </fieldset> */}
                     <fieldset className='form-group'>
                         <label>Item Name:</label>
                         <input className='form-control' {...name} />
