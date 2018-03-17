@@ -44,8 +44,9 @@ module.exports = function(app) {
     app.post('/additem', Admin.additem);
 
     app.post('/upload', upload.single('img'), (req, res) => {
+        console.log('pewp');
         console.log(req.file);
-        res.json({});
+        res.send('ok');
     });
     
     app.get('/getitems', Admin.getitems);

@@ -1,44 +1,45 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import Upload from './upload/upload';
 import * as actions from '../../../actions';
 
 class Additem extends Component {
-    constructor() {
-        super();
-        this.state = {
-            img: '',
-        };
-    };
+    // constructor() {
+    //     super();
+    //     this.state = {
+    //         img: '',
+    //     };
+    // };
 
-    onChange = event => {
-        const state = this.state;
+    // onChange = event => {
+    //     const state = this.state;
 
-        switch(event.target.name) {
-            case 'img':
-                state.img = event.target.files[0];
-                break;
-            default:
-                state[event.target.name] = event.target.value;
-        };
+    //     switch(event.target.name) {
+    //         case 'img':
+    //             state.img = event.target.files[0];
+    //             break;
+    //         default:
+    //             state[event.target.name] = event.target.value;
+    //     };
 
-        this.setState(state);
-    }
+    //     this.setState(state);
+    // }
 
     handleFormSubmit(formProps) {
-        onSubmit = event => {
-            event.preventDefault();
-            const { img } = this.state;
-            const ROOT_URL = 'http://localhost:8000';
-            let fd = new FormData();
+        // onSubmit = event => {
+        //     event.preventDefault();
+        //     const { img } = this.state;
+        //     const ROOT_URL = 'http://localhost:8000';
+        //     let fd = new FormData();
 
-            fd.append('img', img);
+        //     fd.append('img', img);
 
-            axios.post(`${ROOT_URL}/upload`, fd)
-                .then(res => {
-                    console.log(res);
-                });
-            }
+        //     axios.post(`${ROOT_URL}/upload`, fd)
+        //         .then(res => {
+        //             console.log(res);
+        //         });
+        //     }
         
         this.props.addItem(formProps);
     }
@@ -57,11 +58,12 @@ class Additem extends Component {
         const {handleSubmit, fields: { name, price, desc, img }} = this.props;
         return (
             <div>
+                <Upload />
                 <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                    <fieldset className='form-group'>
+                    {/* <fieldset className='form-group'>
                         <label>Upload an image</label>
                         <input type='file' encType='multipart/form-data' onChange={this.onChange} {...img} value={null} />
-                    </fieldset>
+                    </fieldset> */}
                     <fieldset className='form-group'>
                         <label>Item Name:</label>
                         <input className='form-control' {...name} />
@@ -97,9 +99,9 @@ function validate(formProps) {
     if(!formProps.desc) {
         errors.desc = 'Description cannot be blank';
     }
-    if(!formProps.img) {
-        errors.img = 'Please select an image';
-    }
+    // if(!formProps.img) {
+    //     errors.img = 'Please select an image';
+    // }
 
     return errors;
 }
