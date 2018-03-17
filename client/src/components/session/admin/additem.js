@@ -1,30 +1,46 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import * as actions from '../../../actions';
 
 class Additem extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
-            selectedFile: null
+            img: '',
         };
-    }
-
-    fileSelectedHandler = event => {
-        this.setState({
-            selectedFile: event.target.files[0]
-        });
     };
 
-    handleFormSubmit(formProps) {
-        const ROOT_URL = 'http://localhost:8000';
-        const fd = new FormData();
-        fd.append('img', this.state.selectedFile, this.state.selectedFile.name);
-        axios.post(`${ROOT_URL}/uploadimg`, fd)
+    onChange = event => {
+        const state = this.state;
 
-        this.props.addItem(formProps); // keep this line if you delete the img stuff
+        switch(event.target.name) {
+            case 'img':
+                state.img = event.target.files[0];
+                break;
+            default:
+                state[event.target.name] = event.target.value;
+        };
+
+        this.setState(state);
+    }
+
+    handleFormSubmit(formProps) {
+        onSubmit = event => {
+            event.preventDefault();
+            const { img } = this.state;
+            const ROOT_URL = 'http://localhost:8000';
+            let fd = new FormData();
+
+            fd.append('img', img);
+
+            axios.post(`${ROOT_URL}/upload`, fd)
+                .then(res => {
+                    console.log(res);
+                });
+            }
+        
+        this.props.addItem(formProps);
     }
 
     renderAlert() {
@@ -37,16 +53,14 @@ class Additem extends Component {
         }
     }
 
-
     render(){
-        const {handleSubmit, fields: { name, price, desc }} = this.props;
+        const {handleSubmit, fields: { name, price, desc, img }} = this.props;
         return (
             <div>
-                
                 <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                     <fieldset className='form-group'>
                         <label>Upload an image</label>
-                        <input type='file' name='img' onChange={this.fileSelectedHandler} />
+                        <input type='file' encType='multipart/form-data' onChange={this.onChange} {...img} value={null} />
                     </fieldset>
                     <fieldset className='form-group'>
                         <label>Item Name:</label>
@@ -83,6 +97,9 @@ function validate(formProps) {
     if(!formProps.desc) {
         errors.desc = 'Description cannot be blank';
     }
+    if(!formProps.img) {
+        errors.img = 'Please select an image';
+    }
 
     return errors;
 }
@@ -95,6 +112,6 @@ function mapStateToProps(state) {
 
 export default reduxForm({
     form: 'additem',
-    fields: ['name', 'price', 'desc'],
+    fields: ['name', 'price', 'desc', 'img'],
     validate
 }, mapStateToProps, actions)(Additem);
