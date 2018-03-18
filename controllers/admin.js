@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Item = mongoose.model('Item');
+const Img = mongoose.model('Img');
 
 exports.getitems = function(req, res, next) {
     Item.find({}, function(err, items) {
@@ -12,8 +13,34 @@ exports.getitems = function(req, res, next) {
 }
 
 exports.img = function(req, res, next) {
-    console.log('crack');
-}
+    // console.log(req.file);
+    const originalname = req.file.originalname;
+    const mimetype = req.file.mimetype;
+    const size = req.file.size;
+    const path = req.file.path;
+
+    Img.findOne({ originalname: originalname }, function(err, existingImg) {
+        if (err) {
+            return next(err);
+        };
+        if (existingImg) {
+            return next(existingImg);
+        };
+        const img = new Img({
+            originalname: originalname,
+            mimetype: mimetype,
+            size: size,
+            path: path
+        });
+        img.save(function(err) {
+            if (err) {
+                return next(err);
+            };
+            res.json({ img });
+            console.log('img saved, breh');
+        });
+    });
+};
 
 exports.additem = function(req, res, next) {
     const name = req.body.name;
@@ -24,10 +51,10 @@ exports.additem = function(req, res, next) {
     Item.findOne({ name: name }, function(err, existingItem) {
         if (err) {
             return next(err);
-        }
+        };
         if (existingItem) {
             return res.status(422).send({ err: 'Item already exists' });
-        }
+        };
         const item = new Item({
             name: name,
             price: price,
@@ -41,4 +68,4 @@ exports.additem = function(req, res, next) {
             console.log('item saved, breh');
         });
     });
-}
+};

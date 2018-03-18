@@ -44,7 +44,6 @@ module.exports = function(app) {
     app.post('/additem', Admin.additem);
 
     app.post('/upload', upload.single('img'), Admin.img, (req, res) => {
-        console.log(req.file);
         res.send(req.file);
     });
     

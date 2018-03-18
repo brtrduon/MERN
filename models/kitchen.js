@@ -19,9 +19,10 @@ const itemSchema = new Schema({
 
 const imgSchema = new Schema({
     // _item: { type:Schema.Types.ObjectId, ref: 'Item'},
-    name: String,
-    type: String,
-    size: Number
+    originalname: { type: String, unique: true },
+    mimetype: String,
+    size: Number,
+    path: String
 });
 
 adminSchema.pre('save', function(next) {
