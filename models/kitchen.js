@@ -13,8 +13,7 @@ const itemSchema = new Schema({
     name: { type: String, unique: true, lowercase: true },
     price: Number,
     desc: String,
-    // img: [{ type: Schema.Types.ObjectId, ref: 'Img'}]
-    //     }, { timestamps: { created: 'created' }
+    img: String
 });
 
 const imgSchema = new Schema({
@@ -24,6 +23,16 @@ const imgSchema = new Schema({
     size: Number,
     path: String
 });
+
+const customerSchema = new Schema({
+    first_name: String,
+    last_name: String,
+    phone_number: { type: String, unique: true },
+    email: { type: String, unique: true, lowercase: true },
+    party_size: Number,
+    date: String,
+    time: String
+})
 
 adminSchema.pre('save', function(next) {
     const admin = this;
@@ -53,5 +62,6 @@ adminSchema.methods.comparePassword = function(candidatePassword, callback) {
 const modelClass = mongoose.model('admin', adminSchema);
 const Item = mongoose.model('Item', itemSchema);
 const Img = mongoose.model('Img', imgSchema);
+const Customer = mongoose.model('Customer', customerSchema);
 
 module.exports = modelClass;
